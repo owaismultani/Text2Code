@@ -1,0 +1,12 @@
+/* Custom styling as needed */
+
+.chat-messages {
+    height: 400px; /* Adjust height as needed */
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #f8f9fa; /* Light gray background */
+    border: 1px solid #dee2e6; /* Bootstrap's border color */
+}
+
+/* Additional custom styles */

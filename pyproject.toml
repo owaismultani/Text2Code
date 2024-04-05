@@ -1,12 +1,15 @@
 [tool.poetry]
 name = "text2code"
 version = "0.1.0"
-description = ""
-authors = ["Owais Multani <owais@quantive.com>"]
+description = "The Text2Code project is a groundbreaking tool designed to bridge the gap between LLMs and software development. Leveraging advanced LLM models allows users to generate executable code from plain English descriptions. Targeting novice and experienced programmers, it aims to simplify the coding process, enhance productivity, and make software development more accessible to a broader audience. Text2Code transforms conceptual ideas into functional code, fostering innovation and collaboration across various domains, whether for educational purposes, rapid prototyping, or streamlining development workflows."
+authors = ["Owais Multani <owais.multani97@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+django = ">5.0 <6.0"
+djangorestframework = ">3.15 <4.0"
+openai = ">1.14 <1.15"
 
 
 [build-system]

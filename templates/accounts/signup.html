@@ -1,0 +1,40 @@
+<!-- accounts/templates/accounts/signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <!-- Add these links in the <head> section of both login.html and signup.html -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container" style="margin-top: 50px;">
+        <div class="row">
+            <form class="col s12 m8 l4 offset-m2 offset-l4" method="post">
+                <h3 class="center-align">Sign Up</h3>
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="row">
+                        <div class="input-field col s12">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.help_text %}
+                                <span class="helper-text" data-error="wrong" data-success="right">{{ field.help_text }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <button type="submit" class="btn waves-effect waves-light">Sign Up</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
