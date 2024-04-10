@@ -4,13 +4,15 @@ from .views import(
     ChatListView, 
     GetLanguagesView, 
     ChatDetailView,
-    MessageListView
+    MessageListView,
+    LandingPageView
 )
 
 urlpatterns = [
-    path('', HomeView.as_view(), name='home'),
-    path('chats/', ChatListView.as_view(), name='chat_list'),
-    path('chats/<int:chat_id>/', ChatDetailView.as_view(), name='chat_detail'),
-    path('chats/<int:chat_id>/messages/', MessageListView.as_view(), name='message_list'),
-    path('languages/', GetLanguagesView.as_view(), name='languages'),
+    path('', LandingPageView.as_view(), name='landing_page'),
+    path('app/', HomeView.as_view(), name='home'),
+    path('app/chats/', ChatListView.as_view(), name='chat_list'),
+    path('app/chats/<int:chat_id>/', ChatDetailView.as_view(), name='chat_detail'),
+    path('app/chats/<int:chat_id>/messages/', MessageListView.as_view(), name='message_list'),
+    path('app/languages/', GetLanguagesView.as_view(), name='languages'),
 ]

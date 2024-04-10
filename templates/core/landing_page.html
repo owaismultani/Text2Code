@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text-to-Code</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/landing_page.css' %}">
+</head>
+<body>
+
+  <!-- Header -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="#">
+      <img src="{% static 'images/logo_dark.png' %}" alt="Text-to-Code Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#" style="color: black;">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-primary text-white cta-button" id="sign-up-botton" href={% url 'signup' %}>Sign Up</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <div class="jumbotron">
+      <h1 class="display-4">Text-to-Code: Simplify Software Development with Natural Language</h1>
+      <p class="lead">Welcome to Text-to-Code - Empowering Developers with Natural Language Programming</p>
+    </div>
+
+    <div class="text-center mt-5">
+        <button type="button" class="btn btn-lg cta-button", onclick="window.location.href={% url 'home' %}">Get Started with Text-to-Code Today</button>
+    </div>
+
+    <br/><br/>
+
+    <div class="section">
+      <div class="container">
+        <h2>Business Overview</h2>
+        <p><h3>Introduction to Text-to-Code</h3>
+            <p>The Text-to-Code project aims to simplify software development by allowing users to generate executable code from natural language descriptions. This innovative approach leverages advancements in Large Language Models (LLMs) to interpret user intents and translate them into instructions and, finally, into programming languages such as Python, Java, JavaScript, or any other specified by the user.</p>
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <h2>Applications and Use Cases</h2>
+        <p><ul>
+            <li>Rapid Prototyping: Quickly generates code snippets and modules from project specifications, speeding up the initial phases of software development.</li>
+            <li>Educational Tools: Assists in teaching programming concepts by providing real-time code examples based on descriptive inputs.</li>
+            <li>Accessibility: Makes programming more accessible to people with disabilities by allowing text-to-code conversion, thereby broadening the inclusivity of software development.</li>
+            <li>Documentation to Code: Converts software documentation or feature descriptions directly into executable code, minimizing the translation gap between specification and implementation.</li>
+          </ul></p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <h2>Business Value</h2>
+        <p><ul>
+            <li>Reduced Development Time: Minimizes the time spent on coding standard functionalities, allowing developers to focus on more complex and innovative aspects of project development.</li>
+            <li>Cost Efficiency: Lowers the barrier to entry for software development, reducing the need for extensive coding training for individuals to contribute to software projects.</li>
+            <li>Enhanced Collaboration: Facilitates a more inclusive and interdisciplinary approach to software development, where ideas from non-technical team members can be more directly integrated into the development process.</li>
+          </ul></p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <h2>Challenges and Considerations</h2>
+        <p>While promising, the Text-to-Code approach faces challenges such as accurately interpreting user intent, handling the nuances of different programming languages, and generating optimized, error-free code.</p>
+
+      </div>
+    </div>
+
+    
+  </div>
+
+  <!-- Bootstrap JS (optional, if you need it for functionality) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

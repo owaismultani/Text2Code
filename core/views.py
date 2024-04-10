@@ -12,6 +12,10 @@ from django.conf import settings
 
 OPENAI_API_KEY = settings.OPENAI_API_KEY
 
+
+class LandingPageView(TemplateView):
+    template_name = 'core/landing_page.html'
+
 class HomeView(LoginRequiredMixin, TemplateView):
     login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
