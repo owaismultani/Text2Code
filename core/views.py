@@ -10,7 +10,7 @@ from django.urls import reverse
 from .services import CodeGenerator
 
 class HomeView(LoginRequiredMixin, TemplateView):
-    login_url = 'accounts/login/'
+    login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
 
     template_name = 'core/home.html'
@@ -21,8 +21,8 @@ class HomeView(LoginRequiredMixin, TemplateView):
         return context
     
 
-class ChatListView(View):
-    login_url = 'accounts/login/'
+class ChatListView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
     model = Chat
 
@@ -34,14 +34,17 @@ class ChatListView(View):
         return HttpResponseRedirect(reverse('chat_detail', args=(chat.id,)))
 
 
-class ChatDetailView(View):
-    login_url = 'accounts/login/'
+class ChatDetailView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
 
     def get(self, request, *args, **kwargs):
         chats = Chat.objects.all()
         chat_id = kwargs['chat_id']
-        chat = Chat.objects.get(id=chat_id)
+        try:
+            chat = Chat.objects.get(id=chat_id)
+        except Chat.DoesNotExist:
+            return render(request, 'core/page_not_found.html', {'chats': chats})
         messages = Message.objects.filter(chat=chat)
         return render(request, 'core/chat.html', {'chat': chat, 'messages': messages, 'chats': chats, 'code': chat.code, 'language': chat.language})
     
@@ -69,8 +72,8 @@ class ChatDetailView(View):
         chat.delete()
         return HttpResponseRedirect(reverse('chat_list'))
 
-class MessageListView(View):
-    login_url = 'accounts/login/'
+class MessageListView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
     
     def post(self, request, *args, **kwargs):
@@ -79,31 +82,27 @@ class MessageListView(View):
         sender = request.user
         text = request.POST.get('text')
         Message.objects.create(chat=chat, sender=sender, text=text)
-        messages = Message.objects.filter(chat=chat)
-        message, code = self.get_suggestions(messages)
+        message, code, suggested_language = self.get_suggestions(chat)
         if message:
-            Message.objects.create(chat=chat, sender=sender, text=message)
+            Message.objects.create(chat=chat, sender=sender, text=message, role='assistant')
         if code:
             Chat.objects.update(code=code)
+        if suggested_language:
+            Chat.objects.update(suggested_language=suggested_language)
 
         return HttpResponseRedirect(reverse('chat_detail', args=(chat.id,) ))
 
 
-    def get_suggestions(self, messages):
+    def get_suggestions(self, chat):
         """
         Get suggestions from openai
         """
         code_generator = CodeGenerator(api_key='sk-')
-        suggestion = code_generator.generate_code(messages)
-
-        # split code and message by ``` separator and remove the last ``` separator
-        message1, code, message2 = suggestion.split('```')
-        code = code[:-3]
-        message = message1 + message2
-        return message, code
+        message, code, suggested_language = code_generator.generate_code(chat)
+        return message, code, suggested_language
 
 
-class GetLanguagesView(View):
+class GetLanguagesView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         languages = [
             {'value': 'python', 'name': 'Python'},

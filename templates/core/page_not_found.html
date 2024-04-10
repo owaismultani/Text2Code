@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found | Text2Code</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/11.0.0/material-components-web.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/notfound.css' %}"> <!-- Assuming you might add specific styles for the not found page -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+
+    {% include 'core/sidebar.html' %}
+
+    <div class="main-content">
+        <div class="not-found">
+            <img src="{% static 'images/404.png' %}" alt="404 Not Found" class="not-found-logo"> <!-- You may need a specific 404 image -->
+            <h2>
+                Oops! Page not found.
+            </h2>
+            <p>
+                We can't seem to find the page you're looking for.
+            </p>
+            <a href="{% url 'home' %}" class="mdc-button mdc-button--raised">Go Home</a> <!-- Adjust the URL as necessary -->
+        </div>
+    </div>
+
+<script src="{% static 'js/sidebar.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/11.0.0/material-components-web.min.js"></script>
+<script>
+    // Initialize Material Design components
+    mdc.autoInit();
+</script>
+</body>
+</html>

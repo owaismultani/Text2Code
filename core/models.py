@@ -7,6 +7,7 @@ class Chat(models.Model):
     title = models.CharField(max_length=255)
     code = models.CharField(max_length=1000000, default='')
     language = models.CharField(max_length=255, default='python')
+    suggested_language = models.CharField(max_length=255, default='')
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chats')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -29,6 +30,7 @@ class Chat(models.Model):
 class Message(models.Model):
     chat = models.ForeignKey(Chat, related_name='messages', on_delete=models.CASCADE)
     text = models.TextField()
+    role = models.CharField(max_length=255, default='user')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='messages')

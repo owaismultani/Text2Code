@@ -14,7 +14,9 @@
             <ul>
                 {% for chat in chats %}
                 <div class="chat-item">
-                    <span class="chat-name-display">{{ chat.title }}</span>
+                    <a href="{% url 'chat_detail' chat.id %}">
+                        <span class="chat-name-display">{{ chat.title }}</span>
+                    </a>
                     <div class="action-buttons">
                         <i class="fas fa-pencil-alt edit-chat-button" onclick="makeEditable();"></i>
                         <form method="post" action="{% url 'chat_detail' chat.id %}" class="chat-edit-form">

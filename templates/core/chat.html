@@ -13,16 +13,24 @@
     <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
     <link rel="stylesheet" href="{% static 'css/chat.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Include the PrismJS CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.min.css" rel="stylesheet" />
+
+    <!-- Include the PrismJS library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js"></script>
+
+    <!-- Optionally, include additional language support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js"></script>
+
     <!-- Consolidate CSS imports -->
 </head>
 <body class="mdc-typography">
     {% include 'core/sidebar.html' %}
 
     <div class="main-content mdc-elevation--z4">
-        <header class="mdc-top-app-bar chat-header">
+        <!-- <header class="mdc-top-app-bar chat-header">
             <div class="mdc-top-app-bar__row">
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                    <!-- Dropdown for selecting coding language -->
                     <div class="mdc-select mdc-select--outlined" style="width: 200px;">
                         <div class="mdc-select__anchor" role="button" aria-haspopup="listbox" aria-expanded="false">
                             <span class="mdc-notched-outline">
@@ -45,39 +53,42 @@
                             </span>
                         </div>
 
-                        <!-- Menu for dropdown options -->
                         <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
                             <ul class="mdc-list" role="listbox" aria-label="Select Language">
                                 <li class="mdc-list-item" role="option" data-value="python">Python</li>
                                 <li class="mdc-list-item" role="option" data-value="javascript">JavaScript</li>
                                 <li class="mdc-list-item" role="option" data-value="java">Java</li>
-                                <!-- Add more options as needed -->
                             </ul>
                         </div>
                     </div>
                 </section>
             </div>
-        </header>
-    
+        </header> -->
+
+        <div class="container-heading">
+            <h2 class="chat-heading">Chat History</h2>
+            <h2 class="code-heading">Code</h2>
+        </div>
+        
         <div class="chat-container">
             <div class="chat-history">
                 {% for message in messages %}
                     <div class="chat-message">
-                        <strong>{{ message.sender }}</strong>: <pre>{{ message.text }}</pre>
+                        <strong>{{ message.role }}</strong>: <pre>{{ message.text }}</pre>
                         <br>
                         <span class="chat-message-date"><small>{{ message.created_at|date:"D, d M Y H:i" }}</small></span>
                     </div>
                 {% empty %}
                     <div class="chat-message">
-                        <strong>Bot</strong>: Welcome to Text2Code! Start by typing your message in the input box below.
+                        <strong>System</strong>: Welcome to Text2Code! Start by typing your message in the input box below.
                         <br>
                         <span class="chat-message-date"><small>{% now "D, d M Y H:i" %}</small></span>
                     </div>
                 {% endfor %}
             </div>
             <div class="divider"></div>
-            <div class="code-output">
-                <pre>{{ chat.code }}</pre>
+            <div class="code-output language-{{chat.suggested_language}}">
+                <pre><code>{{ chat.code }}</code></pre>
             </div>
         </div>
         <footer class="chat-input-area">

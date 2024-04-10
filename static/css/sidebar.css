@@ -230,3 +230,8 @@
 .collapsed .chat-list h3 {
     display: none;
 }
+
+.chat-name-input {
+    width: 100%;
+    padding: 4px;
+}
