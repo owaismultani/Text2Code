@@ -14,30 +14,29 @@
             <ul>
                 {% for chat in chats %}
                 <div class="chat-item">
-                    <a href="{% url 'chat_detail' chat.id %}">
-                        <span class="chat-name">{{ chat.title }}</span>
-                    </a>
+                    <span class="chat-name-display">{{ chat.title }}</span>
                     <div class="action-buttons">
-                        <!-- Rename form -->
-                        <form method="patch" action="{% url 'chat_detail' chat.id %}" style="display: inline;">
+                        <i class="fas fa-pencil-alt edit-chat-button" onclick="makeEditable();"></i>
+                        <form method="post" action="{% url 'chat_detail' chat.id %}" class="chat-edit-form">
                             {% csrf_token %}
-                            <input type="hidden" name="chat_id" value="{{ chat.id }}">
-                            <button type="submit" name="rename_chat" class="edit-chat-btn" title="Rename">
-                                <i class="fas fa-pencil-alt"></i>
-                            </button>
+                            <input type="hidden" name="_method" value="patch">
+                            <input class="chat-name-input" type="text" name="title" value="{{ chat.title }}"  readonly>
                         </form>
-                        
                         <!-- Delete form -->
-                        <form method="delete" action="{% url 'chat_detail' chat.id %}"  style="display: inline;">
+                        <form method="post" action="{% url 'chat_detail' chat.id %}" style="display: inline;">
                             {% csrf_token %}
-                            <button type="submit" name="delete_chat" class="delete-chat-btn" title="Delete">
+                            <input type="hidden" name="_method" value="delete">
+                            <button type="submit" class="delete-chat-btn" title="Delete">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>
                     </div>
                 </div>
                 {% empty %}
-                <p>No chats available.</p>
+                <br>
+                <div class="chat-item">
+                    <span class="chat-name-display">No chats available.</span>
+                </div>
                 {% endfor %}
             </ul>
         </div>

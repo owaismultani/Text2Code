@@ -63,7 +63,7 @@
             <div class="chat-history">
                 {% for message in messages %}
                     <div class="chat-message">
-                        <strong>{{ message.sender }}</strong>: {{ message.text }}
+                        <strong>{{ message.sender }}</strong>: <pre>{{ message.text }}</pre>
                         <br>
                         <span class="chat-message-date"><small>{{ message.created_at|date:"D, d M Y H:i" }}</small></span>
                     </div>
@@ -77,8 +77,7 @@
             </div>
             <div class="divider"></div>
             <div class="code-output">
-                <pre><code class="language-python">print("Hello, World!")</code></pre>
-                <pre><code class="language-javascript">console.log("Hello, World!");</code></pre>
+                <pre>{{ chat.code }}</pre>
             </div>
         </div>
         <footer class="chat-input-area">

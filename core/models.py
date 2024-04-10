@@ -5,6 +5,8 @@ User = get_user_model()
 
 class Chat(models.Model):
     title = models.CharField(max_length=255)
+    code = models.CharField(max_length=1000000, default='')
+    language = models.CharField(max_length=255, default='python')
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chats')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -12,8 +14,8 @@ class Chat(models.Model):
         ordering = ['-created_at']
         db_table = 'chats'
 
-    def __str__(self):
-        return self.title
+    # def __str__(self):
+    #     return self.title
     
     def save(self, *args, **kwargs):
         # Flag to determine if the instance is new

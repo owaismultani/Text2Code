@@ -188,6 +188,21 @@
 }
 
 
+.chat-name-display {
+    display: inline; /* Initial state showing the chat name */
+    color: #818181;
+}
+
+.edit-chat-button {
+    cursor: pointer;
+    color: #333; /* Icon color, adjust as needed */
+    border: none; /* Removes the border */
+}
+
+.chat-edit-form {
+    display: none; /* Hide the form initially */
+}
+
 
 .chat-item {
     display: flex;
@@ -196,11 +211,7 @@
     padding: 10px;
 }
 
-.chat-name {
-    flex-grow: 1; /* Ensures the name takes up the available space */
-}
-
-.edit-chat-btn, .delete-chat-btn {
+.delete-chat-btn {
     background: none;
     border: none;
     cursor: pointer;
@@ -209,7 +220,7 @@
 }
 
 /* Optionally, style on hover to provide visual feedback */
-.edit-chat-btn:hover, .delete-chat-btn:hover {
+.edit-chat-button:hover, .delete-chat-btn:hover {
     color: #d0c8c8;
 }
 
