@@ -1,0 +1,187 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.chat-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden; /* Prevents overflow */
+    margin-top: 100px; /* Adds space around the chat container */
+}
+
+/* Chat history container styling */
+.chat-history {
+    flex: 1;
+    overflow-y: auto; /* Enables vertical scroll */
+    padding: 10px;
+    background-color: #f9f9f9; /* Very light grey, subtle and easy on the eyes */
+    padding: 20px; /* More padding for better spacing around the messages */
+    overflow-y: auto; /* Ensure overflow content is scrollable */
+    border-right: 1px solid #e0e0e0; /* Light border to separate from the rest of the content */
+}
+
+/* Individual chat message styling */
+.chat-message {
+    background-color: #ffffff; /* White background for each message */
+    padding: 10px 15px; /* Padding inside each message */
+    margin-bottom: 15px; /* Space between messages */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+    border: 1px solid #e0e0e0; /* Light border to define edges */
+    font-size: 14px; /* Slightly smaller font-size for messages */
+}
+.chat-message-date {
+    color: #999999; /* Optional: style the date text */
+    font-size: 12px; /* Smaller font size for the date */
+}
+
+/* Last child margin adjustment */
+.chat-history .chat-message:last-child {
+    margin-bottom: 0; /* Removes margin from the last message to align better with container edges */
+}
+
+/* Scrollbar styling for chat history (optional, for webkit browsers) */
+.chat-history::-webkit-scrollbar {
+    width: 6px; /* Narrower scrollbar for more space */
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+    background: #cccccc; /* Scroll thumb color */
+    border-radius: 10px; /* Rounded scroll thumb */
+}
+
+.chat-history::-webkit-scrollbar-track {
+    background: #f0f0f0; /* Scroll track color */
+}
+
+
+
+/* Style for the container where code is displayed */
+.code-output {
+    flex: 1;
+    overflow-y: auto; /* Enables vertical scroll */
+    padding: 10px;
+    background-color: #f7f7f7; /* Light grey background */
+    border-left: 3px solid #6897bb; /* Blue border on the left */
+    padding: 10px; /* Padding inside the code container */
+}
+
+/* Additional styling for <code> elements to improve readability */
+code {
+    background-color: #f7f7f7; /* Light grey background */
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
+    display: block; /* Ensures block-level display */
+    padding: 5px 0; /* Padding above and below the code line */
+    white-space: pre-wrap; /* Allows code to wrap inside the container */
+    word-wrap: break-word; /* Breaks long words to prevent horizontal scrolling */
+    line-height: 0.5; /* Adjust line height for better readability */
+    margin: 0 10px; /* Adds margin on the sides for a bit of space */
+    overflow-x: auto; /* Allows horizontal scrolling for long lines of code */
+}
+
+/* Enhance the appearance of the code with a slight shadow for depth */
+.code-output {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+
+/* Chat and code divider */
+.divider {
+    background-color: #f0e6e6; /* Or any color you prefer */
+    cursor: ew-resize; /* Indicates the divider is movable */
+    width: 1px; /* Adjust based on your preference */
+    height: 100%;
+}
+
+.chat-header {
+    width: 20%;
+    background-color: #ffffff83; /* Example background color */
+}
+/* Remove the border by making it transparent */
+.mdc-notched-outline__leading,
+.mdc-notched-outline__trailing,
+.mdc-notched-outline__notch {
+    border-color: transparent !important;
+}
+/* Add a margin to the top of the select component */
+.mdc-select {
+    margin-top: 10px; /* Adjust this value as needed for the desired gap */
+}
+/* Add space between list items */
+.mdc-list-item {
+    font-size: 16px; /* Adjust font size as needed */
+    margin: 4px 0; /* Adds vertical margin for spacing */
+    padding: 10px 20px; /* Adjust padding for larger click area and more space */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+/* Enhance hover effect */
+.mdc-list-item:hover {
+    background-color: #f0f0f0; /* Light gray background on hover */
+}
+
+
+
+
+.chat-input-area {
+    display: flex;
+    align-items: center; /* vertically center aligns items */
+    justify-content: center; /* horizontally center aligns items */
+    margin: 5px 10px 10px 10px;
+}
+
+.chat-input-area form {
+    display: flex;
+    flex-grow: 1; /* ensures the form takes up all available space */
+    max-width: 70%; /* prevents form from overflowing */
+}
+
+.chat-textarea {
+    padding: 15px 10px 10px 15px; /* Padding inside the textarea */
+    border-radius: 20px; /* Rounded corners for the textarea */
+    border: 1px solid #e0e0e0; /* Light border for the textarea */
+
+}
+
+.send-button {
+    margin-top: 10px; /* Adds space between the textarea and button */
+    margin-left: 5px;
+    cursor: pointer; /* Hand cursor on hover */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.send-button i {
+    color: #ece7e7; /* Icon color */
+}
+
+/* Adjust the following to match the size of your icons if they differ */
+.send-button i.material-icons {
+    font-size: 24px; /* Adjust icon size */
+}
+
+/* Hide the scrollbar but allow scrolling */
+textarea.chat-textarea::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+/* Style the placeholder text color */
+.chat-textarea::placeholder {
+    color: #b0b0b0; /* Or any color that contrasts well with the background */
+    opacity: 1; /* Make sure it's fully opaque */
+}
+
+.copy-right {
+    color: #999999;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+}
+

@@ -1,0 +1,63 @@
+{% load static %}
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-content">
+        <div class="icon" onclick="toggleSidebar()">
+            <i class="material-icons">add</i>
+            <form action="{% url 'chat_list' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="text styled-button">New Chat</button>
+            </form>
+        </div>
+
+        <div class="chat-list">
+            <h3>Chats</h3>
+            <ul>
+                {% for chat in chats %}
+                <div class="chat-item">
+                    <a href="{% url 'chat_detail' chat.id %}">
+                        <span class="chat-name">{{ chat.title }}</span>
+                    </a>
+                    <div class="action-buttons">
+                        <!-- Rename form -->
+                        <form method="patch" action="{% url 'chat_detail' chat.id %}" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="chat_id" value="{{ chat.id }}">
+                            <button type="submit" name="rename_chat" class="edit-chat-btn" title="Rename">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                        </form>
+                        
+                        <!-- Delete form -->
+                        <form method="delete" action="{% url 'chat_detail' chat.id %}"  style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" name="delete_chat" class="delete-chat-btn" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No chats available.</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    <div class="icon" onclick="toggleDropdown()">
+        <i class="material-icons">account_circle</i>
+        <span class="text">Account</span>
+        <!-- Dropdown Menu -->
+        <div class="dropdown-menu">
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+
+</div>    
+<button id="sidebarCollapse" onclick="toggleSidebar()">
+    <i class="material-icons" id="toggleIcon">chevron_left</i>
+</button>
+
+<script src="{% static 'js/sidebar.js' %}"></script>

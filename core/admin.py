@@ -12,3 +12,9 @@
 #     list_display = ('chat', 'sender', 'created_at')
 #     list_filter = ('created_at',)
 #     search_fields = ('text',)
+
+from django.contrib import admin
+from .models import Chat, Message
+
+admin.site.register(Chat)
+admin.site.register(Message)

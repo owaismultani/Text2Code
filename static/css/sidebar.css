@@ -1,0 +1,221 @@
+
+.sidebar {
+    display: flex; /* Enable Flexbox */
+    flex-direction: column; /* Stack children vertically */
+    height: 100vh; /* Full viewport height */
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+/* Adjust padding-top for the sidebar itself if you need space above the first item */
+.sidebar-content {
+    flex-grow: 1; /* Take up available space */
+    padding-top: 20px; /* Top padding for content */
+    padding-bottom: 20px; /* Bottom padding, applies only if there is space between content and bottom-align item */
+}
+
+.bottom-align {
+    margin-top: auto; /* Push to bottom */
+    padding-top: 20px; /* Top padding specifically for the bottom-aligned item */
+    padding-bottom: 20px; /* Bottom padding for the sidebar, ensuring space below the bottom-aligned item */
+}
+
+
+
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar .icon {
+    display: flex; /* Use Flexbox */
+    align-items: center; /* Center vertically */
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px; /* This affects the icon size if you're using a font icon */
+    color: #818181;
+    transition: 0.3s;
+}
+
+
+.sidebar .icon:hover {
+    color: #f1f1f1;
+}
+
+.sidebar .text {
+    margin-left: 10px;
+    font-size: 15px; /* Adjust as needed */
+}
+
+
+.sidebar.collapsed .text {
+    display: none;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 0px 10px;
+    transition: margin-left .5s;
+}
+
+#sidebarCollapse {
+    position: absolute;
+    top: 50%;
+    left: 200px;
+    z-index: 2;
+    background: #111;
+    border: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 20px;
+    transition: 0.5s;
+}
+
+
+.dropdown-menu {
+    width: 100%; /* Match the parent width */
+    display: none; /* Hide by default */
+    position: absolute;
+    background-color: #f9f9f9;
+    margin-bottom: 100px;
+    margin-left: 0px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+
+
+
+.dropdown-menu button {
+    background-color: transparent;
+    border: none;
+    color: #333333;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 16px;
+}
+
+.dropdown-menu button:hover {
+    background-color: #f0f0f0;
+}
+
+
+.sidebar .text, .sidebar .styled-button {
+    margin-left: 10px;
+    font-size: 15px; /* Adjust as needed */
+    background: none; /* Makes the button background transparent */
+    border: none; /* Removes border */
+    color: inherit; /* Inherits the text color from the parent */
+    cursor: pointer; /* Changes cursor to indicate clickable */
+}
+
+.sidebar .styled-button:hover {
+    background-color: transparent; /* Ensures the button background doesn't change on hover */
+    color: #f1f1f1; /* Optional: Changes color on hover for visual feedback */
+}
+
+.sidebar.collapsed .text, .sidebar.collapsed .styled-button {
+    display: none; /* Hides text when sidebar is collapsed */
+}
+
+
+
+/* Chat List Styles */
+
+
+.chat-list {
+    list-style: none; /* Removes the default list styling */
+    padding: 0; /* Removes the default padding */
+    margin: 0; /* Aligns the list to the sidebar edges */
+}
+
+.chat-list h3 {
+    color: #818181;
+    margin-left: 10px;
+    margin-bottom: 10px; /* Spacing between title and items */
+}
+
+.chat-list ul {
+    margin: 0;
+    padding: 0;
+    overflow-y: auto; /* Enables scrolling if the list is long */
+    max-height: 70vh; /* Adjust based on your sidebar height */
+    /* Hides the scrollbar */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    
+}
+.chat-list ul::-webkit-scrollbar {
+    display: none;
+}
+
+.chat-list li {
+    padding: 10px;
+}
+
+.chat-list a {
+    text-decoration: none; /* Removes underline from links */
+    color: #818181;
+    display: block; /* Makes the whole area clickable */
+}
+
+.chat-list li:hover, .chat-list li:focus {
+    background-color: #222; /* Hover/Focus state background color */
+}
+
+/* Scrollbar Styles (optional) */
+.chat-list::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.chat-list::-webkit-scrollbar-track {
+    background: #ffffff; /* Track color */
+}
+
+.chat-list::-webkit-scrollbar-thumb {
+    background: #ffffff; /* Handle color */
+}
+
+.chat-list::-webkit-scrollbar-thumb:hover {
+    background: #ffffff; /* Handle color on hover */
+}
+
+
+
+.chat-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.chat-name {
+    flex-grow: 1; /* Ensures the name takes up the available space */
+}
+
+.edit-chat-btn, .delete-chat-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333; /* Icon color, adjust as needed */
+    margin-left: 10px; /* Space between buttons */
+}
+
+/* Optionally, style on hover to provide visual feedback */
+.edit-chat-btn:hover, .delete-chat-btn:hover {
+    color: #d0c8c8;
+}
+
+
+.collapsed .chat-name,
+.collapsed .chat-item,
+.collapsed .chat-list h3 {
+    display: none;
+}

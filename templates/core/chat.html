@@ -1,0 +1,103 @@
+{% load static %}
+{% load tz %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text2Code</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/11.0.0/material-components-web.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Consolidate CSS imports -->
+</head>
+<body class="mdc-typography">
+    {% include 'core/sidebar.html' %}
+
+    <div class="main-content mdc-elevation--z4">
+        <header class="mdc-top-app-bar chat-header">
+            <div class="mdc-top-app-bar__row">
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                    <!-- Dropdown for selecting coding language -->
+                    <div class="mdc-select mdc-select--outlined" style="width: 200px;">
+                        <div class="mdc-select__anchor" role="button" aria-haspopup="listbox" aria-expanded="false">
+                            <span class="mdc-notched-outline">
+                                <span class="mdc-notched-outline__leading"></span>
+                                <span class="mdc-notched-outline__notch">
+                                    <span class="mdc-floating-label">Select Language</span>
+                                </span>
+                                <span class="mdc-notched-outline__trailing"></span>
+                            </span>
+                            <span class="mdc-select__selected-text-container">
+                                <span class="mdc-select__selected-text"></span>
+                            </span>
+                            <span class="mdc-select__dropdown-icon">
+                                <span class="mdc-select__dropdown-icon-graphic">
+                                    <svg class="mdc-select__dropdown-icon-svg" viewBox="7 10 10 5">
+                                        <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd" points="7 10 12 15 17 10"></polygon>
+                                        <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd" points="7 15 12 10 17 15"></polygon>
+                                    </svg>
+                                </span>
+                            </span>
+                        </div>
+
+                        <!-- Menu for dropdown options -->
+                        <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                            <ul class="mdc-list" role="listbox" aria-label="Select Language">
+                                <li class="mdc-list-item" role="option" data-value="python">Python</li>
+                                <li class="mdc-list-item" role="option" data-value="javascript">JavaScript</li>
+                                <li class="mdc-list-item" role="option" data-value="java">Java</li>
+                                <!-- Add more options as needed -->
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </header>
+    
+        <div class="chat-container">
+            <div class="chat-history">
+                {% for message in messages %}
+                    <div class="chat-message">
+                        <strong>{{ message.sender }}</strong>: {{ message.text }}
+                        <br>
+                        <span class="chat-message-date"><small>{{ message.created_at|date:"D, d M Y H:i" }}</small></span>
+                    </div>
+                {% empty %}
+                    <div class="chat-message">
+                        <strong>Bot</strong>: Welcome to Text2Code! Start by typing your message in the input box below.
+                        <br>
+                        <span class="chat-message-date"><small>{% now "D, d M Y H:i" %}</small></span>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="divider"></div>
+            <div class="code-output">
+                <pre><code class="language-python">print("Hello, World!")</code></pre>
+                <pre><code class="language-javascript">console.log("Hello, World!");</code></pre>
+            </div>
+        </div>
+        <footer class="chat-input-area">
+            <form action="{% url 'message_list' chat.id %}" method="post">
+                {% csrf_token %}
+                <textarea id="chat-input" name="text" class="mdc-text-field__input chat-textarea" rows="1" placeholder="Type Message..."></textarea>
+                <button class="mdc-button mdc-button--raised send-button">
+                    <i class="material-icons">send</i> <!-- Icon can be adjusted as needed -->
+                </button>
+            </form>
+        </footer>
+        <p class="copy-right">© 2021 Text2Code</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/11.0.0/material-components-web.min.js"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/chat.js' %}"></script>
+    <script>
+    mdc.autoInit();
+    </script>
+</body>
+</html>

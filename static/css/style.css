@@ -9,4 +9,8 @@
     border: 1px solid #dee2e6; /* Bootstrap's border color */
 }
 
-/* Additional custom styles */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    transition: margin-left .5s;
+}

@@ -84,6 +84,18 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'djongo',
+#             'NAME': 'text2code',
+#             'ENFORCE_SCHEMA': True,
+#             'CLIENT': {
+#                 'host': 'mongodb+srv://c0905692:U3KvmmmTCnAzS8Y6@cluster0.svwvmbq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+#             }  
+#         }
+# }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
