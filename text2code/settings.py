@@ -144,3 +144,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email settings
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+# ENVIRONMENT VARIABLES
+import os
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+if not OPENAI_API_KEY:
+    raise ValueError('OPENAI_API_KEY environment variable not set')

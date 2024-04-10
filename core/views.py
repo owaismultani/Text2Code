@@ -8,6 +8,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .services import CodeGenerator
+from django.conf import settings
+
+OPENAI_API_KEY = settings.OPENAI_API_KEY
 
 class HomeView(LoginRequiredMixin, TemplateView):
     login_url = '/accounts/login/'
@@ -97,7 +100,7 @@ class MessageListView(LoginRequiredMixin, View):
         """
         Get suggestions from openai
         """
-        code_generator = CodeGenerator(api_key='sk-')
+        code_generator = CodeGenerator(api_key=OPENAI_API_KEY)
         message, code, suggested_language = code_generator.generate_code(chat)
         return message, code, suggested_language
 
