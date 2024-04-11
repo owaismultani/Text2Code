@@ -25,47 +25,60 @@ class CodeGenerator:
         self.max_tokens = max_tokens
         openai.api_key = self.api_key
 
-    def generate_code(self, chat):
+    def generate_code(self, chat) -> dict:
         """
         Generate code based on the given messages using OpenAI's API.
 
         Parameters
         ----------
-        messages : list
-            List of messages to generate code from.
+        chat : Chat
+            The chat instance.
 
         Returns
         -------
-        str
-            Generated code as a string.
+        dict
+            A dictionary containing the generated message, code, and language.
         """
         messages = chat.messages.all()
         client = openai.Client(api_key=self.api_key)
         response = client.chat.completions.create(
             model=self.model,
             messages=self._create_messages(messages),
-            functions=self.__get_text2code_func(),
+            functions=self.__get_text2code_func_conf(),
             function_call = 'auto'
         )
-        if response.choices[0].message.function_call is not None:
-            json_response = json.loads(response.choices[0].message.function_call.arguments)
-            message = json_response['message']
-            code = json_response['code']
-            suggested_language = json_response['language']
+        message = response.choices[0].message
+        if message.function_call is not None:
+            parsed_response = self.parse_function_call_response(message)
         else:
-            content = response.choices[0].message.content
-            args = content.split('```')
-            if len(args) == 1:
-                message = args[0]
-                code = ''
-                suggested_language = ''
-            else:
-                suggested_language, code = args[1].split('\n', 1)
-                message = args[0] + args[2]
+            parsed_response = self.parse_content_response(message)
 
-        return message, code, suggested_language
+        return parsed_response
 
-    def _create_messages(self, messages):
+
+    @staticmethod
+    def parse_function_call_response(message):
+        """Extract data from function call response."""
+        json_response = json.loads(message.function_call.arguments)
+        return {
+            'message': json_response.get('message', ''),
+            'code': json_response.get('code', ''),
+            'language': json_response.get('language', '')
+        }
+    
+    @staticmethod
+    def parse_content_response(message):
+        """Extract data from content response."""
+        args = message.content.split('```')
+        if len(args) == 1:
+            return {'message': args[0], 'code': '', 'language': ''}
+        
+        language, code = args[1].split('\n', 1)
+        message = args[0] + args[2]
+        return {'message': message, 'code': code, 'language': language}
+
+    @staticmethod
+    def _create_messages(messages):
         """
         Create a list of messages in the format required by OpenAI's API.
 
@@ -85,7 +98,8 @@ class CodeGenerator:
         ]
         return messages
     
-    def __get_text2code_func(self):
+    @staticmethod
+    def __get_text2code_func_conf():
         """
         Get the json representation of the text2code function.
         """

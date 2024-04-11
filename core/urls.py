@@ -1,11 +1,10 @@
 from django.urls import path
 from .views import(
+    LandingPageView,
     HomeView, 
     ChatListView, 
-    GetLanguagesView, 
     ChatDetailView,
     MessageListView,
-    LandingPageView
 )
 
 urlpatterns = [
@@ -14,5 +13,4 @@ urlpatterns = [
     path('app/chats/', ChatListView.as_view(), name='chat_list'),
     path('app/chats/<int:chat_id>/', ChatDetailView.as_view(), name='chat_detail'),
     path('app/chats/<int:chat_id>/messages/', MessageListView.as_view(), name='message_list'),
-    path('app/languages/', GetLanguagesView.as_view(), name='languages'),
 ]
