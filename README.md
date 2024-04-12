@@ -34,7 +34,7 @@ Text2Code is live at [Text2Code](https://owaismultani.pythonanywhere.com)
    ```
 5. Migrate the database:
    ```bash
-   python manage.py migrate
+   poetry run python manage.py migrate
    ```
 6. Export the OpenAI API key:
    ```bash
@@ -42,7 +42,7 @@ Text2Code is live at [Text2Code](https://owaismultani.pythonanywhere.com)
     ```
 7. Start the development server:
    ```bash
-   python manage.py runserver
+   poetry run python manage.py runserver
    ```
 
 Now access the application at `http://localhost:8000`.
