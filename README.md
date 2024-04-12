@@ -3,6 +3,9 @@
 
 Welcome to Text-to-Code, a transformative tool designed to empower developers by enabling the conversion of natural language descriptions into executable code. This Django-based application leverages the power of Large Language Models (LLMs) to interpret user intents and translate them into various programming languages such as Python, Java, and JavaScript.
 
+## Live Demo
+Text2Code is live at [Text2Code](owaismultani.pythonanywhere.com)
+
 ## Getting Started
 
 ### Prerequisites
