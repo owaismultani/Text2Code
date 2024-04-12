@@ -23,7 +23,7 @@ Welcome to Text-to-Code, a transformative tool designed to empower developers by
    ```
 3. Navigate to the project directory:
    ```bash
-   cd text2code
+   cd Text2Code
    ```
 4. Install dependencies using Poetry:
    ```bash
